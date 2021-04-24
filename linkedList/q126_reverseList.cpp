@@ -54,6 +54,19 @@ node *reverseList(node **h_ref)
     return prev;
 }
 
+// explanation: https://www.youtube.com/watch?v=O0By4Zq0OFc
+node *reverseListRecursive(node *head)
+{
+    if (head == nullptr or head->next == nullptr)
+    {
+        return head;
+    }
+    node *rest = reverseListRecursive(head->next);
+    head->next->next = head;
+    head->next = nullptr;
+    return rest;
+}
+
 int main()
 {
     node *head = nullptr;
@@ -63,6 +76,6 @@ int main()
     head = insert(&head, 40);
     head = insert(&head, 50);
     printList(head);
-    head = reverseList(&head);
+    head = reverseListRecursive(head);
     printList(head);
 }
